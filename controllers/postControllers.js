@@ -5,7 +5,7 @@ const posts = require('../data/posts');
 function index(req, res) {
     let filteredposts = posts;
 
-    if (req.query.tag) {
+    /*if (req.query.tag) {
         const tag = req.query.tag.toLowerCase();
 
         filteredposts = posts.filter(post =>
@@ -13,7 +13,18 @@ function index(req, res) {
         );
     }
 
+    res.json(filteredposts);*/
+
+    if (req.query.tag) {
+        const tag = req.query.tag.toLowerCase();
+        //solo i post che hanno il tag uguale a dolci, ad esempio, devono essere restituiti
+        filteredposts = posts.filter(post =>
+            post.tags.some(t => t.toLowerCase() === tag)
+        );
+    }
+
     res.json(filteredposts);
+
 }
 
 function show(req, res) {
