@@ -25,6 +25,7 @@ function index(req, res) {
 
     res.json(filteredposts);
 
+
 }
 
 function show(req, res) {
@@ -42,7 +43,23 @@ function show(req, res) {
 }
 
 function store(req, res) {
-    res.send('Creazione di un nuovo post');
+    console.log("Store chiamato");
+    //res.send('Creazione di un nuovo post');
+    //creiamo un nuovo id per il nuovo post
+    const newId = posts[posts.length - 1].id + 1;
+    //creiamo un nuovo oggetto post con i dati ricevuti
+    const newPost = {
+        id: newId,
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags
+    };
+    //afggiorniamo l'array dei post con il nuovo post
+    posts.push(newPost);
+    console.log(posts);
+    //restituiamo lo status e il post creato
+    res.status(201).json(newPost);
 }
 
 function update(req, res) {

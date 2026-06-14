@@ -9,10 +9,7 @@ const posts = require('./data/posts');
 //registro body parser per application json
 app.use(express.json());
 
-app.post('/posts', (req, res) => {
-    console.log(req.body);
-    //in req.body troveremo i dati ricevuti
-});
+
 // index
 app.get('/', (req, res) => {
     res.json('Hello world');
