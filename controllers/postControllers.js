@@ -48,7 +48,13 @@ function show(req, res) {
          res.status(404).json({ message: 'Post non trovato' });
      }*/
 
-    const sql = 'SELECT * FROM posts WHERE id = ?';
+    /* const sql = 'SELECT * FROM posts WHERE id = ?';
+     connection.query(sql, [id], (err, results) => {
+         if (err) return res.status(500).json({ error: 'Database query failed' });
+         if (results.length === 0) return res.status(404).json({ error: 'Post not found' });
+         res.json(results[0]);
+     });*/
+    const sql = 'SELECT * FROM posts INNER JOIN post-tag ON posts.id = post-tag.post_id inner JOIN tags ON post-tag.tag_id = tags.id WHERE posts.id = ?';
     connection.query(sql, [id], (err, results) => {
         if (err) return res.status(500).json({ error: 'Database query failed' });
         if (results.length === 0) return res.status(404).json({ error: 'Post not found' });
