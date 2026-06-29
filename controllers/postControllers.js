@@ -1,5 +1,5 @@
 const posts = require('../data/posts');
-
+const connection = require('../data/db');
 
 //index
 function index(req, res) {
@@ -15,7 +15,7 @@ function index(req, res) {
 
     res.json(filteredposts);*/
 
-    if (req.query.tag) {
+    /*if (req.query.tag) {
         const tag = req.query.tag.toLowerCase();
         //solo i post che hanno il tag uguale a dolci, ad esempio, devono essere restituiti
         filteredposts = posts.filter(post =>
@@ -23,8 +23,15 @@ function index(req, res) {
         );
     }
 
-    res.json(filteredposts);
-
+    res.json(filteredposts);*/
+    connection.query('SELECT * FROM posts', (err, results) => {
+        if (err) {
+            console.error('Errore durante la query:', err);
+            res.status(500).json({ error: 'Errore del server' });
+        } else {
+            res.json(results);
+        }
+    });
 
 }
 

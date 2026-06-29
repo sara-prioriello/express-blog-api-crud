@@ -1,6 +1,6 @@
 const server_error = (err, req, res, next) => {
 
-    res.status(500).json({ error: 'Something went wrong!' });
+    res.status(500).json({ error: 'Something went wrong!', message: err.message });
 }
 
 module.exports = server_error;

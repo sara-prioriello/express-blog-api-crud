@@ -25,11 +25,6 @@ app.use('/posts', postsRouter);
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
-app.get('/error', (req, res) => {
-    throw new Error('Test error');
-});
-
 // server error middlware 
 app.use(server_error);
 
